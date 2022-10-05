@@ -1,0 +1,24 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "employee tracker command line",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaredLove/Employee-Tracker.git"
+  },
+  "author": "Jared Love",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JaredLove/Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/JaredLove/Employee-Tracker#readme",
+  "keywords": [],
+  "devDependencies": {
+    "jest": "^29.1.2"
+  }
+}
