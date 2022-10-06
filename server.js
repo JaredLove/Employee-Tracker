@@ -35,7 +35,7 @@ const db = mysql.createConnection(
   db.connect(function (err) {
     if (err) throw err;
     console.log("connected as id " + db.threadId);
-    console.log('%c JavaScript!!', 'font-weight: bold; font-size: 50px;color: red; text-shadow: 3px 3px 0 rgb(217,31,38) , 6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) , 12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) , 18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113)');
+    console.log("EMPLOYEE MANAGER!!!!!!!   (:");
     // runs the app
     firstPrompt();
 });
@@ -183,6 +183,9 @@ function addEmployee() {
     const roleChoices = res.map(({ id, job_title, salary }) => ({
       value: id, name: `${job_title}`, salary: `${salary}`
     }));
+    //const managerChoices = res.map(({ id,  }) => ({
+      //value: id, name: `${first_name}`
+    //}));
 
     console.table(res);
     console.log("RoleToInsert!");
@@ -191,7 +194,7 @@ function addEmployee() {
   });
 }
 
-function promptInsert(roleChoices) {
+function promptInsert(roleChoices, managerChoices) {
 
   inquirer
     .prompt([
@@ -210,7 +213,7 @@ function promptInsert(roleChoices) {
         name: "roleId",
         message: "What is the employee's role?",
         choices: roleChoices
-      },
+      }
     ])
     .then(function (answer) {
       console.log(answer);
@@ -295,13 +298,13 @@ function employeeArray() {
   console.log("Updating an employee");
 
   var query =
-    `SELECT e.id, e.first_name, e.last_name, r.title, d.name AS department, r.salary, CONCAT(m.first_name, ' ', m.last_name) AS manager
-  FROM employee e
-  JOIN role r
+    `SELECT e.id, e.first_name, e.last_name, r.job_title, d.department_name AS department, r.salary, CONCAT(m.first_name, ' ', m.last_name) AS manager
+  FROM employees e
+  JOIN roles r
 	ON e.role_id = r.id
-  JOIN department d
+  JOIN departments d
   ON d.id = r.department_id
-  JOIN employee m
+  JOIN employees m
 	ON m.id = e.manager_id`
 
   db.query(query, function (err, res) {
@@ -322,15 +325,15 @@ function roleArray(employeeChoices) {
   console.log("Updating an role");
 
   var query =
-    `SELECT r.id, r.title, r.salary 
-  FROM role r`
+    `SELECT r.id, r.job_title, r.salary 
+  FROM roles r`
   let roleChoices;
 
   db.query(query, function (err, res) {
     if (err) throw err;
 
-    roleChoices = res.map(({ id, title, salary }) => ({
-      value: id, title: `${title}`, salary: `${salary}`      
+    roleChoices = res.map(({ id, job_title, salary }) => ({
+      value: id, name: `${job_title}`, salary: `${salary}`      
     }));
 
     console.table(res);
@@ -359,7 +362,7 @@ function promptEmployeeRole(employeeChoices, roleChoices) {
     ])
     .then(function (answer) {
 
-      var query = `UPDATE employee SET role_id = ? WHERE id = ?`
+      var query = `UPDATE employees SET role_id = ? WHERE id = ?`
       // when finished prompting, insert a new item into the db with that info
       db.query(query,
         [ answer.roleId,  
