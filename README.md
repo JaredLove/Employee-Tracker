@@ -1,6 +1,7 @@
 ## Employee-Tracker
 
 An employee tracker to keep track of managers, employee, salaries, roles, and departments.
+That can be customized and updated.
 
 
 ## Sample
