@@ -123,8 +123,7 @@ function viewEmployee() {
     if (err) throw err;
 
     console.table(res);
-    console.log("Employees viewed!\n");
-    console.table(res);
+    console.log("Viewing Employees!\n");
     firstPrompt();
   });
 
@@ -143,15 +142,13 @@ function viewRoles() {
     if (err) throw err;
 
     console.table(res);
-    console.log("Roles viewed!\n");
-    console.table(res);
+    console.log("Viewing Roles!\n");
     firstPrompt();
   });
 
 }
 
 function viewDepartments() {
-  console.log("Viewing Departments\n");
 
     const query =
     `SELECT * FROM departments`;
@@ -160,7 +157,7 @@ function viewDepartments() {
     if (err) throw err;
 
     console.table(res);
-    console.log("Departments viewed!\n");
+    console.log("Viewing Departments!\n");
     console.table(res);
     firstPrompt();
   });
@@ -169,7 +166,7 @@ function viewDepartments() {
 
 // Make a employee array
 function addEmployee() {
-  console.log("Inserting an employee!")
+  console.log("Adding an employee!")
 
   var query =
     `SELECT r.id, r.job_title, d.department_name, r.salary
@@ -188,7 +185,7 @@ function addEmployee() {
     //}));
 
     console.table(res);
-    console.log("RoleToInsert!");
+    console.log("Get Role!");
 
     promptInsert(roleChoices);
   });
@@ -241,7 +238,7 @@ function promptInsert(roleChoices, managerChoices) {
 //"Remove Employees" / DELETE, DELETE FROM
 // Make a employee array to delete
 function removeEmployee() {
-  console.log("Deleting an employee");
+  console.log("Deleting employee");
 
   var query =
     `SELECT employees.id, employees.first_name, employees.last_name
@@ -255,7 +252,7 @@ function removeEmployee() {
     }));
 
     console.table(res);
-    console.log("ArrayToDelete!\n");
+    console.log("Delete array!\n");
 
     promptDelete(deleteEmployeeChoices);
   });
@@ -281,7 +278,7 @@ function promptDelete(deleteEmployeeChoices) {
         if (err) throw err;
 
         console.table(res);
-        console.log(res.affectedRows + "Deleted!\n");
+        console.log(res.affectedRows + "Destroyed!\n");
 
         firstPrompt();
       });
@@ -315,14 +312,14 @@ function employeeArray() {
     }));
 
     console.table(res);
-    console.log("employeeArray To Update!\n")
+    console.log("Updated to employeeArray!\n")
 
     roleArray(employeeChoices);
   });
 }
 
 function roleArray(employeeChoices) {
-  console.log("Updating an role");
+  console.log("Role being updated");
 
   var query =
     `SELECT r.id, r.job_title, r.salary 
@@ -337,7 +334,7 @@ function roleArray(employeeChoices) {
     }));
 
     console.table(res);
-    console.log("roleArray to Update!\n")
+    console.log("Update to roleArray!\n")
 
     promptEmployeeRole(employeeChoices, roleChoices);
   });
@@ -350,13 +347,13 @@ function promptEmployeeRole(employeeChoices, roleChoices) {
       {
         type: "list",
         name: "employeeId",
-        message: "Which employee do you want to set with the role?",
+        message: "Which employee did you want to set with a role?",
         choices: employeeChoices
       },
       {
         type: "list",
         name: "roleId",
-        message: "Which role do you want to update?",
+        message: "Which role did you want to update?",
         choices: roleChoices
       },
     ])
@@ -372,7 +369,7 @@ function promptEmployeeRole(employeeChoices, roleChoices) {
           if (err) throw err;
 
           console.table(res);
-          console.log(res.affectedRows + "Updated successfully!");
+          console.log(res.affectedRows + "success!");
 
           firstPrompt();
         });
@@ -403,23 +400,23 @@ function addRole() {
 
  
 
-    promptAddRole(departmentChoices);
+    addRole(departmentChoices);
   });
 }
 
-function promptAddRole(departmentChoices) {
+function addRole(departmentChoices) {
 
   inquirer
     .prompt([
       {
         type: "input",
         name: "roleTitle",
-        message: "Role title?"
+        message: "Role?"
       },
       {
         type: "input",
         name: "roleSalary",
-        message: "Role Salary"
+        message: "Salary?"
       },
       {
         type: "list",
@@ -441,7 +438,7 @@ function promptAddRole(departmentChoices) {
           if (err) throw err;
 
           console.table(res);
-          console.log("Role Inserted!");
+          console.log("Role Added!");
 
           firstPrompt();
         });
@@ -476,7 +473,7 @@ function departmentPrompt() {
           if (err) throw err;
 
           
-          console.log("Department Inserted!");
+          console.log("Department Created!");
 
           firstPrompt();
         });
