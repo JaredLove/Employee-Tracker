@@ -32,8 +32,7 @@ const db = mysql.createConnection(
   );
   db.connect(function (err) {
     if (err) throw err;
-    console.log("connected as id " + db.threadId);
-    console.log("EMPLOYEE MANAGER!!!!!!!   (:");
+    console.log("EMPLOYEE MANAGER!!!!!   (:");
 
     firstPrompt();
 });
