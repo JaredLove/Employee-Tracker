@@ -163,7 +163,7 @@ function viewDepartments() {
 
 
 function addEmployee() {
-  console.log("Adding an employee!")
+  console.log("Adding an Employee!")
 
   var query =
     `SELECT r.id, r.job_title, d.department_name, r.salary
@@ -182,7 +182,7 @@ function addEmployee() {
     //}));
 
     console.table(res);
-    console.log("Get Role!");
+    console.log("Get A Role!");
 
     promptInsert(roleChoices);
   });
@@ -235,7 +235,7 @@ function promptInsert(roleChoices, managerChoices) {
 
 //employee array to delete an employee
 function removeEmployee() {
-  console.log("Deleting employee");
+  console.log("Deleting A employee");
 
   var query =
     `SELECT employees.id, employees.first_name, employees.last_name
